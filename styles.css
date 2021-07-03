@@ -1,0 +1,118 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(
+    135deg,
+    rgb(255, 168, 168) 10%,
+    rgb(252, 255, 0) 100%
+  );
+}
+
+a {
+  text-decoration: none;
+}
+
+.container-bodybox {
+  border: 3px solid #ffa974;
+  max-width: 600px;
+  display: block;
+  margin: 185px auto;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 601px;
+  background: #fff;
+  margin-bottom: 0;
+}
+
+.author-line a {
+  color: #77529e;
+  font-style: italic;
+  transition: all 200ms ease-in-out;
+}
+
+.author-line a:hover {
+  color: #9f1861;
+}
+
+.author-line {
+  text-align: center;
+  font-size: 10px;
+  color: #77529e;
+  margin-bottom: 120px;
+}
+
+.header-banner {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  padding: 20px;
+  border: 1px solid #fece5e;
+}
+
+.place-date-time-update-block {
+  display: inline-block;
+  line-height: 0.8;
+}
+.cityandstate {
+  font-weight: 200;
+  font-size: 36px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+.city-name {
+  font-weight: bolder;
+}
+.today-date-time {
+  font-size: 10px;
+}
+
+.temperature-info-block {
+  /* display: inline-block; */
+  text-align: right;
+  line-height: 0.9;
+  float: right;
+}
+.temperature {
+  font-size: 40px;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+.degree-links {
+  font-size: 16px;
+  position: relative;
+  top: -15px;
+}
+
+.degree-links a {
+  transition: all 200ms ease-in-out;
+  color: #fece5e;
+}
+.degree-links a:hover {
+  color: #f45905;
+}
+.wind,
+.feels-like,
+.sunrise-sunset {
+  font-size: 12px;
+}
+
+.weather-description {
+  text-transform: capitalize;
+}
+
+hr {
+  border: 2px dashed #ffa952;
+  margin: 100px 0 0 auto;
+  background-color: white;
+}
+
+.card-forecast {
+  padding: 20px 20px 5px 20px;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.card-forecast .col-2 {
+  font-size: 13px;
+}
