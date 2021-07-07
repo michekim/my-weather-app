@@ -47,9 +47,30 @@ fahrenheitLink.addEventListener("click", convertToFahrenheit);
 function convertToFahrenheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#number-temperature");
+  let maxTemperatureElement = document.querySelector("#max");
+  let minTemperatureElement = document.querySelector("#min");
+  let feelsLikeTemperatureElement = document.querySelector("#feels-like");
+
   let fahrenheitTemperature = (celciusTemperature * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+
+  let maxTemperatureFahrenheit = (maxTemperature * 9) / 5 + 32;
+  let minTemperatureFahrenheit = (minTemperature * 9) / 5 + 32;
+  let feelsLikeFahrenheit = (feelsLike * 9) / 5 + 32;
+
+  let maxTemperatureValue = Math.round(maxTemperatureFahrenheit);
+  maxTemperatureElement.innerHTML = `Max: ${maxTemperatureValue}°`;
+
+  let minTemperatureValue = Math.round(minTemperatureFahrenheit);
+  minTemperatureElement.innerHTML = `Min: ${minTemperatureValue}°`;
+
+  let feelsLikeValue = Math.round(feelsLikeFahrenheit);
+  feelsLikeTemperatureElement.innerHTML = `Feels like: ${feelsLikeValue}°`;
 }
+
+//  let maxTemperatureValue = Math.round(response.data.main.temp_max);
+//  let temperatureMaxDisplay = document.querySelector("#max");
+//  temperatureMaxDisplay.innerHTML = `Max: ${maxTemperatureValue}°`;
 
 // Convert Degree Scales to Celcius
 let celciusTemperature = null;
@@ -89,6 +110,15 @@ function showWeatherConditions(response) {
   document.querySelector(".country-name").innerHTML = response.data.sys.country;
   document.querySelector(".weather-description").innerHTML =
     response.data.weather[0].description;
+
+  let maxTemperatureValue = Math.round(response.data.main.temp_max);
+  let temperatureMaxDisplay = document.querySelector("#max");
+  temperatureMaxDisplay.innerHTML = `Max: ${maxTemperatureValue}°`;
+
+  let minTemperatureValue = Math.round(response.data.main.temp_min);
+  let temperatureMinDisplay = document.querySelector("#min");
+  temperatureMinDisplay.innerHTML = `Min: ${minTemperatureValue}°`;
+
   let feelsLikeTemperature = Math.round(response.data.main.feels_like);
   let feelsLikeDisplay = document.querySelector(".feels-like");
   feelsLikeDisplay.innerHTML = `Feels like: ${feelsLikeTemperature}°`;
@@ -101,6 +131,10 @@ function showWeatherConditions(response) {
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
 
   celciusTemperature = response.data.main.temp;
+
+  maxTemperature = response.data.main.temp_max;
+  minTemperature = response.data.main.temp_min;
+  feelsLike = response.data.main.feels_like;
 
   // let temperature = Math.round(response.data.main.temp);
   // let numeral = document.querySelector("#number-temperature");
