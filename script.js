@@ -42,14 +42,15 @@ function formatDate(timestamp) {
 
 // Convert Degree Scales to Fahrenheit
 let fahrenheitLink = document.querySelector("#fahrenheit");
-fahrenheitLink.addEventListener("click", convertToFahrenheit);
+fahrenheitLink.addEventListener("click", convertToImperial);
 
-function convertToFahrenheit(event) {
+function convertToImperial(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#number-temperature");
   let maxTemperatureElement = document.querySelector("#max");
   let minTemperatureElement = document.querySelector("#min");
   let feelsLikeTemperatureElement = document.querySelector("#feels-like");
+  let windSpeedElement = document.querySelector("#wind");
 
   let fahrenheitTemperature = (celciusTemperature * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
@@ -57,6 +58,7 @@ function convertToFahrenheit(event) {
   let maxTemperatureFahrenheit = (maxTemperature * 9) / 5 + 32;
   let minTemperatureFahrenheit = (minTemperature * 9) / 5 + 32;
   let feelsLikeFahrenheit = (feelsLike * 9) / 5 + 32;
+  let windSpeedImperial = windSpeed * 2.236937;
 
   let maxTemperatureValue = Math.round(maxTemperatureFahrenheit);
   maxTemperatureElement.innerHTML = `Max: ${maxTemperatureValue}°`;
@@ -66,6 +68,9 @@ function convertToFahrenheit(event) {
 
   let feelsLikeValue = Math.round(feelsLikeFahrenheit);
   feelsLikeTemperatureElement.innerHTML = `Feels like: ${feelsLikeValue}°`;
+
+  let windSpeedValue = Math.round(windSpeedImperial);
+  windSpeedElement.innerHTML = `Wind speed: ${windSpeedValue} mph`;
 }
 
 //  let maxTemperatureValue = Math.round(response.data.main.temp_max);
@@ -82,6 +87,23 @@ function convertToCelcius(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#number-temperature");
   temperatureElement.innerHTML = Math.round(celciusTemperature);
+
+  let maxTemperatureValue = Math.round(maxTemperature);
+  let maxTemperatureElement = document.querySelector("#max");
+  maxTemperatureElement.innerHTML = `Max: ${maxTemperatureValue}°`;
+
+  let minTemperatureValue = Math.round(minTemperature);
+  let minTemperatureElement = document.querySelector("#min");
+  minTemperatureElement.innerHTML = `Min: ${minTemperatureValue}°`;
+
+  let feelsLikeValue = Math.round(feelsLike);
+  let feelsLikeTemperatureElement = document.querySelector("#feels-like");
+  feelsLikeTemperatureElement.innerHTML = `Feels like: ${feelsLikeValue}°`;
+
+  let windSpeedKmh = windSpeed * 3.6;
+  let windSpeedValue = Math.round(windSpeedKmh);
+  let windSpeedElement = document.querySelector("#wind");
+  windSpeedElement.innerHTML = `Wind speed: ${windSpeedValue} km/h`;
 }
 
 // Weather Search Bar
@@ -123,30 +145,18 @@ function showWeatherConditions(response) {
   let feelsLikeDisplay = document.querySelector(".feels-like");
   feelsLikeDisplay.innerHTML = `Feels like: ${feelsLikeTemperature}°`;
 
-  let windDescription = Math.round(response.data.wind.speed);
+  let windDescription = Math.round(response.data.wind.speed * 3.6);
   let windDisplay = document.querySelector(".wind");
-  windDisplay.innerHTML = `Wind speed: ${windDescription} m/s`;
+  windDisplay.innerHTML = `Wind speed: ${windDescription} km/h`;
 
   let dateElement = document.querySelector("#todays-date");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
 
   celciusTemperature = response.data.main.temp;
-
   maxTemperature = response.data.main.temp_max;
   minTemperature = response.data.main.temp_min;
   feelsLike = response.data.main.feels_like;
-
-  // let temperature = Math.round(response.data.main.temp);
-  // let numeral = document.querySelector("#number-temperature");
-  // numeral.innerHTML = `${temperature}`;
-
-  // let currentCity = response.data.name;
-  // let cityDisplay = document.querySelector(".city-name");
-  // cityDisplay.innerHTML = `${currentCity}`;
-
-  // let currentCountry = response.data.sys.country;
-  // let countryDisplay = document.querySelector(".country-name");
-  // countryDisplay.innerHTML = `,${currentCountry}`;
+  windSpeed = response.data.wind.speed;
 }
 
 let searchButton = document.querySelector("#search-button");
