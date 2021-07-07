@@ -62,8 +62,16 @@ a {
 .city-name {
   font-weight: bolder;
 }
-.today-date-time {
-  font-size: 10px;
+
+#todays-date,
+#last-updated {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.sunrise-sunset {
+  position: relative;
+  top: -10px;
 }
 
 .temperature-info-block {
@@ -93,17 +101,20 @@ a {
 }
 .wind,
 .feels-like,
-.sunrise-sunset {
+.sunrise-sunset,
+.max,
+.min {
   font-size: 12px;
 }
 
 .weather-description {
   text-transform: capitalize;
+  font-weight: 500;
 }
 
 hr {
   border: 2px dashed #ffa952;
-  margin: 100px 0 0 auto;
+  margin: 80px 0 0 auto;
   background-color: white;
 }
 

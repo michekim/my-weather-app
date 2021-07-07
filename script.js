@@ -1,45 +1,44 @@
 // Formatting the current date
-let currentDate = new Date();
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-let month = months[currentDate.getMonth()];
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let day = days[currentDate.getDay()];
-let date = currentDate.getDate();
-let hours = currentDate.getHours();
-if (hours < 10) {
-  hours = `0${hours}`;
-}
-let minutes = currentDate.getMinutes();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
-}
-let year = currentDate.getFullYear();
+function formatDate(timestamp) {
+  let currentDate = new Date(timestamp);
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[currentDate.getMonth()];
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[currentDate.getDay()];
+  let date = currentDate.getDate();
+  let hours = currentDate.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = currentDate.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let year = currentDate.getFullYear();
 
-let today = `<font size="-1">Today: ${hours}:${minutes} | ${day} ${month} ${date}, ${year}</font>`;
-document.getElementById("todays-date").innerHTML = today;
-
-// --------------------------------------------------------------------
+  return `Today: ${day} ${month} ${date}, ${year} <br/> Last updated: ${hours}:${minutes}`;
+}
 
 // Convert Degree Scales to Fahrenheit
 let fahrenheitLink = document.querySelector("#fahrenheit");
@@ -47,36 +46,22 @@ fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
 function convertToFahrenheit(event) {
   event.preventDefault();
-  let displayedTemperature = document.querySelector(".number-temperature");
-  let temperature = displayedTemperature.innerHTML;
-  temperature = Number(temperature);
-  displayedTemperature.innerHTML = Math.round((temperature * 9) / 5 + 32);
-
-  // let displayedFeelsLikeTemperature = document.querySelector(".feels-like");
-  // feelsLikeTemperature = displayedFeelsLikeTemperature.innerHTML;
-  // feelsLikeTemperature = Number(feelsLikeTemperature);
-  // displayedFeelsLikeTemperature.innerHTML = Math.round((feelsLikeTemperature * 9) / 5 + 32);
+  let temperatureElement = document.querySelector("#number-temperature");
+  let fahrenheitTemperature = (celciusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 
 // Convert Degree Scales to Celcius
+let celciusTemperature = null;
+
 let celciusLink = document.querySelector("#celcius");
 celciusLink.addEventListener("click", convertToCelcius);
 
 function convertToCelcius(event) {
   event.preventDefault();
-  let displayedTemperature = document.querySelector(".number-temperature");
-  let temperature = displayedTemperature.innerHTML;
-  temperature = Number(temperature);
-  displayedTemperature.innerHTML = Math.round(((temperature - 32) * 5) / 9);
-
-  let displayedFeelsLikeTemperature = document.querySelector(".feels-like");
-  feelsLikeTemperature = displayedFeelsLikeTemperature.innerHTML;
-  feelsLikeTemperature = Number(feelsLikeTemperature);
-  displayedFeelsLikeTemperature.innerHTML = Math.round(
-    ((feelsLikeTemperature - 32) * 5) / 9
-  );
+  let temperatureElement = document.querySelector("#number-temperature");
+  temperatureElement.innerHTML = Math.round(celciusTemperature);
 }
-// -----------------------------------------------------------------
 
 // Weather Search Bar
 function searchCity(city) {
@@ -97,7 +82,6 @@ function handleSubmit(event) {
 }
 
 function showWeatherConditions(response) {
-  console.log(response.data.main.temp);
   document.querySelector("#number-temperature").innerHTML = Math.round(
     response.data.main.temp
   );
@@ -112,6 +96,11 @@ function showWeatherConditions(response) {
   let windDescription = Math.round(response.data.wind.speed);
   let windDisplay = document.querySelector(".wind");
   windDisplay.innerHTML = `Wind speed: ${windDescription} m/s`;
+
+  let dateElement = document.querySelector("#todays-date");
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+
+  celciusTemperature = response.data.main.temp;
 
   // let temperature = Math.round(response.data.main.temp);
   // let numeral = document.querySelector("#number-temperature");
