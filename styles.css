@@ -99,6 +99,12 @@ a {
 .degree-links a:hover {
   color: #f45905;
 }
+
+.degree-links .active {
+  color: #f45905;
+  cursor: default;
+}
+
 .wind,
 .feels-like,
 .sunrise-sunset,

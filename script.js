@@ -40,7 +40,7 @@ function formatDate(timestamp) {
   return `Today: ${day} ${month} ${date}, ${year} <br/> Last updated: ${hours}:${minutes}`;
 }
 
-// Convert Degree Scales to Fahrenheit
+// Convert Degree Scales to Fahrenheit and MPH
 let fahrenheitLink = document.querySelector("#fahrenheit");
 fahrenheitLink.addEventListener("click", convertToImperial);
 
@@ -71,13 +71,12 @@ function convertToImperial(event) {
 
   let windSpeedValue = Math.round(windSpeedImperial);
   windSpeedElement.innerHTML = `Wind speed: ${windSpeedValue} mph`;
+
+  celcius.classList.remove("active");
+  fahrenheit.classList.add("active");
 }
 
-//  let maxTemperatureValue = Math.round(response.data.main.temp_max);
-//  let temperatureMaxDisplay = document.querySelector("#max");
-//  temperatureMaxDisplay.innerHTML = `Max: ${maxTemperatureValue}°`;
-
-// Convert Degree Scales to Celcius
+// Convert Degree Scales to Celcius and KMH
 let celciusTemperature = null;
 
 let celciusLink = document.querySelector("#celcius");
@@ -104,6 +103,9 @@ function convertToCelcius(event) {
   let windSpeedValue = Math.round(windSpeedKmh);
   let windSpeedElement = document.querySelector("#wind");
   windSpeedElement.innerHTML = `Wind speed: ${windSpeedValue} km/h`;
+
+  celcius.classList.add("active");
+  fahrenheit.classList.remove("active");
 }
 
 // Weather Search Bar
