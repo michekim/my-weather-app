@@ -37,8 +37,16 @@ function formatDate(timestamp) {
   }
   let year = currentDate.getFullYear();
 
+  //   let todaysDateElement = document.querySelector("#todays-date");
+  //   todaysDateElement.innerHTML = `Today: ${day} ${month} ${date}, ${year} <br/> Last updated: ${hours}:${minutes}`;
+  // }
+
   return `Today: ${day} ${month} ${date}, ${year} <br/> Last updated: ${hours}:${minutes}`;
 }
+
+// function sunriseSunset(timestamp) {
+//   let sunTime = new Date(timestamp);
+// }
 
 // Convert Degree Scales to Fahrenheit and MPH
 let fahrenheitLink = document.querySelector("#fahrenheit");
@@ -108,24 +116,6 @@ function convertToCelcius(event) {
   fahrenheit.classList.remove("active");
 }
 
-// Weather Search Bar
-function searchCity(city) {
-  let apiKey = "cc3020a8130c9ab7aef52513c57eeb32";
-  // let apiEndpoint = "https://api.openweathermap.org/data/2.5/forecast/daily";
-  // let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=metric&cnt=7`;
-
-  let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
-  let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=metric`;
-
-  axios.get(apiUrl).then(showWeatherConditions);
-}
-
-function handleSubmit(event) {
-  event.preventDefault();
-  let city = document.querySelector("#search-input").value;
-  searchCity(city);
-}
-
 function showWeatherConditions(response) {
   document.querySelector("#number-temperature").innerHTML = Math.round(
     response.data.main.temp
@@ -154,11 +144,38 @@ function showWeatherConditions(response) {
   let dateElement = document.querySelector("#todays-date");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
 
-  celciusTemperature = response.data.main.temp;
+  // let sunriseElement = document.querySelector("#sunrise");
+  // sunriseElement.innerHTML = new Date(response.data.sys.sunrise * 1000).format(
+  //   "h:i:s"
+  // );
+
+  // let sunsetElement = document.querySelector("#sunset");
+  // sunsetElement.innerHTML = response.data.sys.sunset * 1000;
+  // // sunsetElement.innerHTML.replace("formatDate", "");
+
   maxTemperature = response.data.main.temp_max;
   minTemperature = response.data.main.temp_min;
   feelsLike = response.data.main.feels_like;
   windSpeed = response.data.wind.speed;
+  celciusTemperature = response.data.main.temp;
+}
+
+// Weather Search Bar
+function searchCity(city) {
+  let apiKey = "cc3020a8130c9ab7aef52513c57eeb32";
+  // let apiEndpoint = "https://api.openweathermap.org/data/2.5/forecast/daily";
+  // let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=metric&cnt=7`;
+
+  let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
+  let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showWeatherConditions);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-input").value;
+  searchCity(city);
 }
 
 let searchButton = document.querySelector("#search-button");
