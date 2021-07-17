@@ -144,6 +144,14 @@ function showWeatherConditions(response) {
   let dateElement = document.querySelector("#todays-date");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
 
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+
   // let sunriseElement = document.querySelector("#sunrise");
   // sunriseElement.innerHTML = new Date(response.data.sys.sunrise * 1000).format(
   //   "h:i:s"
