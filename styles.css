@@ -20,7 +20,8 @@ a {
   border-radius: 10px;
   min-width: 601px;
   background: #fff;
-  margin-bottom: 0;
+  margin-top: 100px;
+  margin-bottom: 150px;
 }
 
 .author-line a {
@@ -37,7 +38,6 @@ a {
   text-align: center;
   font-size: 10px;
   color: #77529e;
-  margin-bottom: 120px;
 }
 
 .header-banner {
@@ -124,12 +124,12 @@ hr {
   background-color: white;
 }
 
-.card-forecast {
+.weather-forecast {
   padding: 0px 20px 5px 20px;
   text-align: center;
   line-height: 1.8;
 }
 
-.card-forecast .col-2 {
+.weather-forecast .col-2 {
   font-size: 13px;
 }
